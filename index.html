@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Lua</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Mi Página con Lua</h1>
+    </header>
+    <section class="content">
+        <p>Esta página utiliza Lua en lugar de JavaScript.</p>
+        <button onclick="handleButtonClick()">Haz clic aquí</button>
+        <p id="result"></p>
+    </section>
+
+    <!-- Incluir la biblioteca Lua en el navegador -->
+    <script src="https://cdn.jsdelivr.net/npm/lua-in-js/src/lua5.1.5.js"></script>
+
+    <script>
+        // Función para ejecutar código Lua desde JavaScript
+        function runLuaCode(luaCode) {
+            try {
+                var lua = new Lua5_1();
+                lua.execute(luaCode);
+            } catch (error) {
+                console.error('Error al ejecutar código Lua:', error);
+            }
+        }
+
+        // Función para manejar clics en el botón
+        function handleButtonClick() {
+            // Código Lua a ejecutar
+            var luaCode = `
+                function handleButtonClickLua()
+                    local result = "¡Has hecho clic en el botón desde Lua!"
+                    return result
+                end
+            `;
+
+            // Ejecutar el código Lua
+            runLuaCode(luaCode);
+
+            // Obtener el resultado de Lua y mostrarlo en el elemento result
+            try {
+                var result = handleButtonClickLua();
+                document.getElementById("result").textContent = result;
+            } catch (error) {
+                console.error('Error al llamar a handleButtonClickLua:', error);
+            }
+        }
+    </script>
+</body>
+</html>
